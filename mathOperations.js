@@ -1,8 +1,7 @@
-/** We have to write four functions
+/** We have to write functions
  * 1) to add 2 arrays and provide the result in new array
  * 2) to subtract 2 arrays
  * 3) to multiply 2 arrays
- * 4) to divide 2 arrays
  */
 
 // Declaring the arrays to perform operaions
@@ -18,32 +17,30 @@ let length2 = arr2.length;
  * @throws {Error} if the provided arary is not valid
  */
 function addArray(arr1, arr2) {
-  //to handle the case where number should be integer 
+  //to handle the case where number should be integer
   //and in between the digits 0 and 9
-  for(let i = 0;i<=arr1.length-1;i++){
-    if(!Number.isInteger(arr1[i]) || arr1[i]<0 || arr1[i]>9){
-      throw new Error("enter a integer")
+  for (let i = 0; i <= arr1.length - 1; i++) {
+    if (!Number.isInteger(arr1[i]) || arr1[i] < 0 || arr1[i] > 9) {
+      throw new Error("enter a integer");
     }
   }
-  for(let i = 0;i<=arr2.length-1;i++){
-    if(!Number.isInteger(arr2[i]) && arr2[i]<0 && arr2[i]>9){
-      throw new Error("enter a integer")
+  for (let i = 0; i <= arr2.length - 1; i++) {
+    if (!Number.isInteger(arr2[i]) && arr2[i] < 0 && arr2[i] > 9) {
+      throw new Error("enter a integer");
     }
   }
   // to handle empty array
-  if(arr1.length===0){
-    return arr2
-  }
-  else if(arr2.length===0){
-    return arr1
-  }
-  else if(arr1.length===0 && arr2.length===0){
-    throw new Error("provide value for 1 array atleast")
+  if (arr1.length === 0) {
+    return arr2;
+  } else if (arr2.length === 0) {
+    return arr1;
+  } else if (arr1.length === 0 && arr2.length === 0) {
+    throw new Error("provide value for 1 array atleast");
   }
 
   // to avoid negative values
-  if(arr1[0]<0|| arr2[0]<0){
-    throw new Error("provide positive number")
+  if (arr1[0] < 0 || arr2[0] < 0) {
+    throw new Error("provide positive number");
   }
   // for the ease of using ahead
   let ogLen1 = length1 - 1;
@@ -57,20 +54,20 @@ function addArray(arr1, arr2) {
   while (arr2.length < arr1.length) {
     arr2.unshift(0);
   }
-  
+
   // if the arr2.length is greater than arr1.length
   while (arr1.length < arr2.length) {
     arr1.unshift(0);
   }
   // if the arr1.length is greater than arr2.length
-  if(length1>length2){
+  if (length1 > length2) {
     // while loop to iterate from the back till i reaches 0
-    
+
     while (ogLen1 >= 0) {
       // the sum variable
       let sum = arr1[ogLen1] + arr2[ogLen1] + carry;
       result.unshift(sum % 10);
-      
+
       carry = Math.floor(sum / 10);
       ogLen1--;
     }
@@ -82,7 +79,7 @@ function addArray(arr1, arr2) {
     return result;
   }
   // if the arr2.length is greater than arr1.length
-  else{
+  else {
     // while loop to iterate from the back till i reaches 0
     while (ogLen2 >= 0) {
       // the sum variable
@@ -98,9 +95,7 @@ function addArray(arr1, arr2) {
 
     return result;
   }
-  
 }
-// console.log(addArray(arr1,arr2))
 
 /** This is a fucntion to subtract 2 arrays
  * @param {number[]} arr1 the first array
@@ -109,32 +104,30 @@ function addArray(arr1, arr2) {
  * @throws {Error} if the provided array is not valid
  */
 function subsArray(arr1, arr2) {
-  //to handle the case where number should be integer 
+  //to handle the case where number should be integer
   //and in between the digits 0 and 9
-  for(let i = 0;i<=arr1.length-1;i++){
-    if(!Number.isInteger(arr1[i]) || arr1[i]<0 || arr1[i]>9){
-      throw new Error("enter a integer")
+  for (let i = 0; i <= arr1.length - 1; i++) {
+    if (!Number.isInteger(arr1[i]) || arr1[i] < 0 || arr1[i] > 9) {
+      throw new Error("enter a integer");
     }
   }
-  for(let i = 0;i<=arr2.length-1;i++){
-    if(!Number.isInteger(arr2[i]) || arr2[i]<0 || arr2[i]>9){
-      throw new Error("enter a integer")
+  for (let i = 0; i <= arr2.length - 1; i++) {
+    if (!Number.isInteger(arr2[i]) || arr2[i] < 0 || arr2[i] > 9) {
+      throw new Error("enter a integer");
     }
   }
 
   // to handle empty array
-  if(arr1.length===0){
-    return arr2
-  }
-  else if(arr2.length===0){
-    return arr1
-  }
-  else if(arr1.length===0 && arr2.length===0){
-    throw new Error("provide value for 1 array atleast")
+  if (arr1.length === 0) {
+    return arr2;
+  } else if (arr2.length === 0) {
+    return arr1;
+  } else if (arr1.length === 0 && arr2.length === 0) {
+    throw new Error("provide value for 1 array atleast");
   }
   // to avoid negative values
-  if(arr1[0]<0|| arr2[0]<0){
-    throw new Error("provide positive number")
+  if (arr1[0] < 0 || arr2[0] < 0) {
+    throw new Error("provide positive number");
   }
   // for the ease
   let trueLen1 = length1 - 1;
@@ -156,9 +149,9 @@ function subsArray(arr1, arr2) {
         arr1.unshift(0);
       }
     }
-    
+
     while (trueLen2 >= 0) {
-      let diff
+      let diff;
       // if we have borrowed something then subtract 1 from the arr1[i]
       if (borrow === 1) {
         arr2[trueLen2] = arr2[trueLen2] - borrow;
@@ -169,7 +162,7 @@ function subsArray(arr1, arr2) {
       if (arr2[trueLen2] < arr1[trueLen2]) {
         arr2[trueLen2] = arr2[trueLen2] + 10;
         borrow = 1;
-         diff = arr2[trueLen2] - arr1[trueLen2];
+        diff = arr2[trueLen2] - arr1[trueLen2];
         subResult.unshift(diff);
         trueLen2--;
       } else {
@@ -179,11 +172,11 @@ function subsArray(arr1, arr2) {
       }
     }
     // Remove leading zeros from the result
-    if(subResult[0]===0){
-      subResult.shift()
+    if (subResult[0] === 0) {
+      subResult.shift();
     }
     // to give negative sign to first number
-		subResult[0] = subResult[0]*-1
+    subResult[0] = subResult[0] * -1;
 
     return subResult;
   }
@@ -215,16 +208,14 @@ function subsArray(arr1, arr2) {
         trueLen1--;
       }
     }
-    
 
-        // Remove leading zeros from the result
-        if(subResult[0]===0){
-          subResult.shift()
-        }
+    // Remove leading zeros from the result
+    if (subResult[0] === 0) {
+      subResult.shift();
+    }
     return subResult;
   }
 }
-console.log(subsArray(arr1, arr2));
 
 /** This is a funciton to multiply 2 arrays
  * @param {number[]} arr1 the first array
@@ -233,77 +224,77 @@ console.log(subsArray(arr1, arr2));
  * @throws {Error} if the provided array is not valid
  */
 function mulArray(arr1, arr2) {
-  //to handle the case where number should be integer 
-  for(let i = 0;i<=arr1.length-1;i++){
-    if(!Number.isInteger(arr1[i])){
-      throw new Error("enter a integer")
+  //to handle the case where number should be integer
+  for (let i = 0; i <= arr1.length - 1; i++) {
+    if (!Number.isInteger(arr1[i])) {
+      throw new Error("enter a integer");
     }
   }
-  for(let i = 0;i<=arr2.length-1;i++){
-    if(!Number.isInteger(arr2[i])){
-      throw new Error("enter a integer")
+  for (let i = 0; i <= arr2.length - 1; i++) {
+    if (!Number.isInteger(arr2[i])) {
+      throw new Error("enter a integer");
     }
   }
   // to handle empty array
-  if(arr1.length===0){
-    return arr2
-  }
-  else if(arr2.length===0){
-    return arr1
-  }
-  else if(arr1.length===0 && arr2.length===0){
-    throw new Error("provide value for 1 array atleast")
+  if (arr1.length === 0) {
+    return arr2;
+  } else if (arr2.length === 0) {
+    return arr1;
+  } else if (arr1.length === 0 && arr2.length === 0) {
+    throw new Error("provide value for 1 array atleast");
   }
 
   // to handle is one of the array is 0
-  if((arr1.length===1 && arr1[0]===0) || (arr2.length===1 && arr2[0]===0)){
-    return 0
+  if (
+    (arr1.length === 1 && arr1[0] === 0) ||
+    (arr2.length === 1 && arr2[0] === 0)
+  ) {
+    return 0;
   }
 
   // to handle the case where the element is negative
-  let mark = 0
-  if(arr1[0]<0 && arr2[0]<0){
-    arr1[0] = -arr1[0]
-    arr2[0] = -arr2[0]
-    
+  let mark = 0;
+  if (arr1[0] < 0 && arr2[0] < 0) {
+    arr1[0] = -arr1[0];
+    arr2[0] = -arr2[0];
+  } else if (arr1[0] < 0) {
+    arr1[0] = -arr1[0];
+    mark = 1;
+  } else if (arr2[0] < 0) {
+    arr2[0] = -arr2[0];
+    mark = 1;
   }
-  else if(arr1[0]<0){
-    arr1[0] = -arr1[0]
-     mark = 1
-  }
-  else if(arr2[0]<0){
-    arr2[0] = -arr2[0]
-    mark = 1
-  }
-  
-    // Initialize the result array with zeros
-    let result = Array(arr1.length + arr2.length).fill(0);
-  
-    // Iterate through the digits of arr1
-    for (let i = arr1.length - 1; i >= 0; i--) {
-      // Iterate through the digits of arr2
-      for (let j = arr2.length - 1; j >= 0; j--) {
-        // Calculate the product
-        let product = arr1[i] * arr2[j];
-        let position = i + j + 1; // Position of the place in the result array
-        let sum = result[position] + product; // Add the product to the current value at the position
-        result[position] = sum % 10; // Update the ones place of the result
-        result[position - 1] += Math.floor(sum / 10); // Carry over the tens place
-      }
-    }
-    // to remove the leading zeros 
-    if(result[0]===0){
-      result.shift()
-    }
-    
-    if(mark==1){
 
-      result.unshift('-')
+  // Initialize the result array with zeros
+  let result = Array(arr1.length + arr2.length).fill(0);
+
+  // Iterate through the digits of arr1
+  for (let i = arr1.length - 1; i >= 0; i--) {
+    // Iterate through the digits of arr2
+    for (let j = arr2.length - 1; j >= 0; j--) {
+      // Calculate the product
+      let product = arr1[i] * arr2[j];
+      let position = i + j + 1; // Position of the place in the result array
+      let sum = result[position] + product; // Add the product to the current value at the position
+      result[position] = sum % 10; // Update the ones place of the result
+      result[position - 1] += Math.floor(sum / 10); // Carry over the tens place
     }
-    return result.join("")
-  
+  }
+  // to remove the leading zeros
+  if (result[0] === 0) {
+    result.shift();
+  }
+
+  if (mark == 1) {
+    result.unshift("-");
+  }
+  return result.join("");
 }
-// console.log(mulArray(arr1,arr2))
 
+function tester() {
+  // console.log(addArray(arr1,arr2))
+  // console.log(subsArray(arr1, arr2));
+  // console.log(mulArray(arr1,arr2))
+}
 
-
+tester();
