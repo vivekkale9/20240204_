@@ -5,8 +5,8 @@
  */
 
 // Declaring the arrays to perform operaions
-let arr1 = [1];
-let arr2 = [40];
+let arr1 = [1,2,0,0];
+let arr2 = [1,2];
 let length1 = arr1.length;
 let length2 = arr2.length;
 
@@ -220,7 +220,7 @@ function subsArray(arr1, arr2) {
 /** This is a funciton to multiply 2 arrays
  * @param {number[]} arr1 the first array
  * @param {number[]} arr2 the second array
- * @returns {number[]} the multiplication
+ * @returns {String} the multiplication
  * @throws {Error} if the provided array is not valid
  */
 function mulArray(arr1, arr2) {
@@ -291,10 +291,88 @@ function mulArray(arr1, arr2) {
   return result.join("");
 }
 
+/** This is a function to divide 2 arrays
+ * @param {number[]} dividend the dividend
+ * @param {number[]} divisor the divisor
+ * @returns {number[]} the division of the numbers
+ * @throws {Error} if the provided array is not valid
+ */
+function divideArray(dividend,divisor){
+    //to handle the case where number should be integer
+    for (let i = 0; i <= dividend.length - 1; i++) {
+      if (!Number.isInteger(dividend[i])) {
+        throw new Error("enter a integer");
+      }
+    }
+    for (let i = 0; i <= divisor.length - 1; i++) {
+      if (!Number.isInteger(divisor[i])) {
+        throw new Error("enter a integer");
+      }
+    }
+    // to handle empty array
+    if (dividend.length === 0) {
+      return divisor;
+    } else if (divisor.length === 0) {
+      return dividend;
+    } else if (dividend.length === 0 && divisor.length === 0) {
+      throw new Error("provide value for 1 array atleast");
+    }
+  
+    // to handle is one of the array is 0
+    if ((dividend.length === 1 && dividend[0] === 0)){
+      return 0;
+    }
+    else if((divisor.length === 1 && divisor[0] === 0)){
+      return "infinity"
+    }
+  
+    // to handle the case where the element is negative
+    let mark = 0;
+    if (dividend[0] < 0 && divisor[0] < 0) {
+      dividend[0] = -dividend[0];
+      divisor[0] = -divisor[0];
+    } else if (dividend[0] < 0) {
+      dividend[0] = -dividend[0];
+      mark = 1;
+    } else if (divisor[0] < 0) {
+      divisor[0] = -divisor[0];
+      mark = 1;
+    }
+
+    // for checking which array is greater in terms of value
+    let dividendValue = parseInt(dividend.join(""), 10);
+    let divisorValue = parseInt(divisor.join(""), 10);
+    
+    let quotient = [];
+    let tempArray = [];
+
+    let i =1
+    while (dividendValue>divisorValue) {
+        tempArray.push(i);
+        // Multiply tempArray with divisor using mulArray function
+        let mul = parseInt(mulArray(tempArray, divisor));
+
+        // Check conditions
+        if (mul < dividendValue) {
+            tempArray.pop(); // Pop the last element and update tempArray
+        } else if (mul == dividendValue) {
+            quotient = tempArray; // Set quotient and break the loop
+            dividendValue -= mul
+            break;
+        } else {
+            // If mul > dividend, return the previous quotient
+            break;
+        }
+        i++
+    }
+    return quotient.join('')  
+}
+
 function tester() {
   // console.log(addArray(arr1,arr2))
   // console.log(subsArray(arr1, arr2));
   // console.log(mulArray(arr1,arr2))
+  console.log(divideArray(arr1,arr2))
 }
 
 tester();
